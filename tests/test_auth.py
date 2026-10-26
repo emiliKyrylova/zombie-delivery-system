@@ -5,7 +5,6 @@ import pytest
 
 from src.core.database import Base, get_db
 from src.main import app
-from src.models.user import UserModel  # Імпорт моделі обов'язковий
 
 # Використовуємо файл для тестів або пам'ять з єдиним потоком
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"

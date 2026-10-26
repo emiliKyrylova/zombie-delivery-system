@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from jose import JWTError, jwt
+from jose import jwt
 from passlib.context import CryptContext
 
 # Секретний ключ для підпису токенів (у реальних проєктах береться з .env)
