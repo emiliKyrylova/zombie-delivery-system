@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Zombie Night Delivery — Control Center</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-red: #ef4444;
+            --accent-green: #22c55e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: 0.5px;
+        }
+        .badge {
+            background: #334155;
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 24px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+        h3 {
+            margin-top: 0;
+            font-size: 16px;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-active { background: rgba(34, 197, 94, 0.15); color: var(--accent-green); }
+        .status-pending { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+
+        .btn {
+            background-color: var(--accent-red);
+            color: #ffffff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.2s;
+            margin-top: 16px;
+        }
+        .btn:hover { background-color: #dc2626; }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .metric-value {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ZOMBIE NIGHT DELIVERY — PLATFORM CONTROL</h1>
+            <div class="badge" id="env-badge">ENV: Sandbox</div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>Активні транзакції та логістика</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Тип вантажу</th>
+                            <th>Кур'єр</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#101</td>
+                            <td>Свіжі мізки (3 од.)</td>
+                            <td>Зомбі Боб</td>
+                            <td><span class="status-badge status-active">В дорозі</span></td>
+                        </tr>
+                        <tr>
+                            <td>#102</td>
+                            <td>Плазма крові (0-)</td>
+                            <td>Очікування</td>
+                            <td><span class="status-badge status-pending">Пошук</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn" onclick="alert('Ініційовано новий запит на доставку.')">Створити замовлення</button>
+            </div>
+
+            <div class="card">
+                <h3>Системні метрики</h3>
+                <div class="metric">
+                    <span>База даних:</span>
+                    <span class="metric-value" style="color: var(--accent-green);">Connected</span>
+                </div>
+                <div class="metric">
+                    <span>Режим відладки:</span>
+                    <span class="metric-value">DEBUG = True</span>
+                </div>
+                <div class="metric">
+                    <span>Архітектура:</span>
+                    <span class="metric-value">FastAPI + Async</span>
+                </div>
+                <div class="metric">
+                    <span>Активні водії:</span>
+                    <span class="metric-value">12 нодів</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
