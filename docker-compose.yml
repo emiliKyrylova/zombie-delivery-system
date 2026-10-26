@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: zombie_postgres_db
+    environment:
+      POSTGRES_USER: zombie_user
+      POSTGRES_PASSWORD: zombie_password
+      POSTGRES_DB: zombie_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - zombie-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zombie_user -d zombie_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    container_name: zombie_fastapi_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://zombie_user:zombie_password@db:5432/zombie_db
+      - ENVIRONMENT=production
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - zombie-network
+    # Додаткове завдання №2 (Hot-Reload через Bind Mounts) — опціонально для розробки
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
+
+networks:
+  zombie-network:
+    driver: bridge

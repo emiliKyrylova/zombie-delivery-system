@@ -12,19 +12,11 @@ app = FastAPI(
     version="3.0.0",
 )
 
-# Підключаємо статичні файли (якщо потрібні картинки або стилі)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
-
-# Підключаємо роути автентифікації
 app.include_router(auth_router)
 
 
-# Головна сторінка MVP (відкриває візуальний HTML-інтерфейс)
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    try:
-        with open("src/static/index.html", "r", encoding="utf-8") as f:
-            html_content = f.read()
-        return html_content
-    except FileNotFoundError:
-        return "<h3>Файл інтерфейсу не знайдено. Перевірте папку src/static/index.html</h3>"
+    with open("src/static/index.html", "r", encoding="utf-8") as f:
+        return f.read()
